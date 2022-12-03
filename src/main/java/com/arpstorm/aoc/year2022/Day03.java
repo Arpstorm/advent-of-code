@@ -18,8 +18,8 @@ public class Day03 {
     public static int solvePart1(List<String> input) {
         int priority = 0;
         for (String rucksack : input) {
-            char found = findEqualItem(rucksack);
-            priority += getItemPriority(found);
+            char item = findEqualItem(rucksack.substring(0, rucksack.length() / 2), rucksack.substring(rucksack.length() / 2));
+            priority += getItemPriority(item);
         }
         return priority;
     }
@@ -33,24 +33,11 @@ public class Day03 {
         return priority;
     }
 
-    private static Character getBadgeChar(String string1, String string2, String string3) {
-        Set<Character> group1 = string1.chars().mapToObj(chr -> (char) chr).collect(Collectors.toSet());
-        Set<Character> group2 = string2.chars().mapToObj(chr -> (char) chr).collect(Collectors.toSet());
-        Set<Character> group3 = string3.chars().mapToObj(chr -> (char) chr).collect(Collectors.toSet());
+    private static char findEqualItem(String comp1, String comp2) {
+        Set<Character> group1 = comp1.chars().mapToObj(chr -> (char) chr).collect(Collectors.toSet());
+        Set<Character> group2 = comp2.chars().mapToObj(chr -> (char) chr).collect(Collectors.toSet());
         group1.retainAll(group2);
-        group1.retainAll(group3);
         return group1.iterator().next();
-    }
-
-    private static char findEqualItem(String rucksack) {
-        for (int a = 0; a < rucksack.length() / 2; a++) {
-            for (int b = rucksack.length() / 2; b < rucksack.length(); b++) {
-                if (rucksack.charAt(a) == rucksack.charAt(b)) {
-                    return rucksack.charAt(a);
-                }
-            }
-        }
-        throw new RuntimeException();
     }
 
     private static int getItemPriority(char character) {
@@ -59,5 +46,14 @@ public class Day03 {
         } else {
             return (int) character - (int) 'A' + 27;
         }
+    }
+
+    private static char getBadgeChar(String string1, String string2, String string3) {
+        Set<Character> group1 = string1.chars().mapToObj(chr -> (char) chr).collect(Collectors.toSet());
+        Set<Character> group2 = string2.chars().mapToObj(chr -> (char) chr).collect(Collectors.toSet());
+        Set<Character> group3 = string3.chars().mapToObj(chr -> (char) chr).collect(Collectors.toSet());
+        group1.retainAll(group2);
+        group1.retainAll(group3);
+        return group1.iterator().next();
     }
 }
