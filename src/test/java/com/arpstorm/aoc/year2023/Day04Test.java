@@ -7,12 +7,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Day01Test {
+public class Day04Test {
 
     @Test
     void verifyResults() {
-        List<String> input = Utils.readInput("/year2023/input.day01.txt");
-        assertEquals(55130, Day01.solvePart1(input));
-        assertEquals(54985, Day01.solvePart2(input));
+        List<String> input = Utils.readInput("/year2023/input.day04.txt");
+        assertEquals(25004, Day04.solvePart1(input));
+        assertEquals(14427616, Day04.solvePart2(input));
     }
 }
