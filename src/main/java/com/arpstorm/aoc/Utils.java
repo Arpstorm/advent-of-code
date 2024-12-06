@@ -19,4 +19,14 @@ public class Utils {
             return null;
         }
     }
+
+    public static String readInputAsString(String fileName) {
+        try {
+            Path path = Paths.get(Utils.class.getResource(fileName).toURI());
+            return Files.readString(path, StandardCharsets.UTF_8);
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
